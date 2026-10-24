@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'none'">
+<title>Gestion Colonie &amp; Pedigree - COLOMBIER DAULT MARTINE</title>
+<style>
+:root{--primary:#2d6a4f;--hover:#40916c;--bg:#121816;--card:#1e2623;--text:#e0e6e3;--muted:#9ba8a1;--border:#2d3a35;--male:#60a5fa;--fem:#f87171;--head:#1b382b;--gold:#74c69d}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:15px}
+.container{max-width:1350px;margin:0 auto}
+.hidden{display:none!important}
+h1,h2{color:var(--gold);margin:5px 0 10px}
+.title{background:var(--head);border:2px solid var(--primary);border-radius:8px;padding:15px;margin-bottom:15px;text-align:center}
+.title h1{font-size:2em;letter-spacing:2px;text-transform:uppercase;margin:0}
+.card{background:var(--card);padding:15px;border-radius:8px;border:1px solid var(--border);margin-bottom:15px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:15px}
+.stat{text-align:center;margin:0}.stat b{display:block;font-size:1.6em;color:var(--gold)}.stat span{font-size:.82em;color:var(--muted);font-weight:600}
+.tabs{display:flex;justify-content:center;gap:10px;margin-bottom:15px;flex-wrap:wrap}
+.tab{padding:10px 18px;font-weight:700;border:2px solid var(--primary);background:var(--card);color:var(--gold);border-radius:6px;cursor:pointer;text-decoration:none;font-size:.9em}
+.tab.active,.tab:hover{background:var(--primary);color:#fff}
+.pane{display:none}.pane.active{display:block}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+@media(max-width:950px){.grid,.g3{grid-template-columns:1fr}}
+.fg{margin-bottom:8px}
+label{display:block;font-weight:600;margin-bottom:2px;font-size:.82em;color:var(--muted)}
+input,select,textarea{width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:4px;font-size:.9em;background:#161e1b;color:var(--text);font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--primary)}
+button{background:var(--primary);color:#fff;border:0;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:700;font-size:.85em}
+button:hover{background:var(--hover)}
+.edit{background:#2563eb}.danger{background:#991b1b}.danger:hover{background:#7f1d1d}.sec{background:#214e3a}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid var(--border);padding:6px 8px;text-align:left;font-size:.85em}
+th{background:var(--head);color:var(--gold)}
+.M{color:var(--male);font-weight:700}.F{color:var(--fem);font-weight:700}
+.link{color:var(--gold);cursor:pointer;text-decoration:underline}
+.ped{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(8,minmax(50px,auto));gap:6px;padding:10px;border:1px solid var(--border);border-radius:6px}
+.box{border:1px solid var(--border);border-radius:4px;padding:5px 7px;font-size:.78em;background:#161e1b}
+.box.M{border-left:4px solid var(--male);background:#17253b;color:var(--text)}
+.box.F{border-left:4px solid var(--fem);background:#331d24;color:var(--text)}
+.box.e{border-style:dashed;color:var(--muted);display:flex;align-items:center}
+.box small{display:block;color:var(--muted)}
+.c0{grid-column:1;grid-row:1/span 8;background:var(--head)!important}
+.p1{grid-column:2;grid-row:1/span 4}.p2{grid-column:2;grid-row:5/span 4}
+.q1{grid-column:3;grid-row:1/span 2}.q2{grid-column:3;grid-row:3/span 2}.q3{grid-column:3;grid-row:5/span 2}.q4{grid-column:3;grid-row:7/span 2}
+.cell{border:2px solid var(--primary);border-radius:8px;padding:12px}
+.cell h3{margin:0 0 8px;color:var(--gold);display:flex;justify-content:space-between;border-bottom:2px solid var(--border);padding-bottom:6px;font-size:1em}
+.cell ul{margin:0;padding-left:18px;font-size:.85em}
+footer{text-align:center;margin-top:30px;padding:15px;font-size:.85em;color:var(--muted);border-top:1px solid var(--border)}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.ph{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#161e1b;margin:0}
+.ph img{width:100%;height:170px;object-fit:cover;cursor:zoom-in;display:block}
+.ph div{padding:6px 8px;font-size:.8em;display:flex;justify-content:space-between;gap:6px;align-items:center}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;z-index:9;cursor:zoom-out;padding:10px}
+#lb img{max-width:100%;max-height:100%}
+/* Connexion */
+#lock{min-height:90vh;display:flex;align-items:center;justify-content:center}
+#lock .card{width:100%;max-width:380px;border:2px solid var(--primary);text-align:center}
+#lock .big{font-size:3em}
+.err{color:var(--fem);font-size:.85em;min-height:1.3em;margin:6px 0}
+.hint{font-size:.78em;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ÉCRAN DE CONNEXION -->
+<div id="lock">
+  <div class="card">
+    <div class="big">🕊️</div>
+    <h2>COLOMBIER DAULT MARTINE</h2>
+    <p id="lockMsg" style="color:var(--muted);font-size:.9em"></p>
+    <form id="lockForm" autocomplete="off">
+      <div class="fg"><input id="user" placeholder="Identifiant" autocomplete="username" maxlength="30" required></div>
+      <div class="fg"><input type="password" id="pw" placeholder="Mot de passe" autocomplete="current-password" required></div>
+      <div class="fg hidden" id="pw2box"><input type="password" id="pw2" placeholder="Confirmer le mot de passe" autocomplete="new-password"></div>
+      <label style="display:flex;gap:6px;align-items:center;cursor:pointer"><input type="checkbox" id="showPw" style="width:auto"> Afficher le mot de passe</label>
+      <div class="err" id="lockErr" role="alert"></div>
+      <button type="submit" id="lockBtn" style="width:100%">🔓 Se connecter</button>
+    </form>
+    <div class="hint" id="forgot"><a href="#" id="forgotLink" style="color:var(--muted)">Identifiant / mot de passe oublié ?</a></div>
+  </div>
+</div>
+
+<!-- APPLICATION -->
+<div id="app" class="hidden">
+  <div class="title"><h1>🕊️ COLOMBIER DAULT MARTINE 🕊️</h1></div>
+
+  <div class="card row" style="justify-content:space-between">
+    <strong>Gestion Colonie &amp; Pedigrees</strong>
+    <div class="row">
+      <button class="sec" data-act="export">💾 Exporter</button>
+      <button class="sec" data-act="import">📂 Importer</button>
+      <button class="danger" data-act="reset">🗑️ Tout effacer</button>
+      <button data-act="lock">🔒 Verrouiller</button>
+      <input type="file" id="importFile" accept=".json" class="hidden">
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="card stat"><span>📊 Effectif total</span><b id="s-t">0</b></div>
+    <div class="card stat"><span style="color:var(--male)">♂ Mâles</span><b id="s-m" style="color:var(--male)">0</b></div>
+    <div class="card stat"><span style="color:var(--fem)">♀ Femelles</span><b id="s-f" style="color:var(--fem)">0</b></div>
+    <div class="card stat"><span>❓ Non renseigné</span><b id="s-x" style="color:var(--muted)">0</b></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="colonie">📋 Colonie &amp; Pedigree</button>
+    <button class="tab" data-tab="pigeonniers">🏠 Pigeonniers (6)</button>
+    <button class="tab" data-tab="accouplements">💒 Accouplements (12)</button>
+    <button class="tab" data-tab="repro">🥚 Bilan Reproduction</button>
+    <button class="tab" data-tab="galerie">🖼️ Galerie Photo</button>
+  </div>
+
+  <div id="tab-colonie" class="pane active">
+    <div class="grid">
+      <div class="card">
+        <h2>Ajouter / Modifier</h2>
+        <form id="pForm">
+          <div class="fg"><label>Année</label><input type="number" id="annee" placeholder="ex: 2026"></div>
+          <div class="fg"><label>N° de Bague *</label><input id="bague" placeholder="ex: FR-12345" required maxlength="30"></div>
+          <div class="fg"><label>Sexe</label><select id="sexe"><option value="M">Mâle</option><option value="F">Femelle</option><option value="X">Inconnu</option></select></div>
+          <div class="fg"><label>Pigeonnier</label><select id="pigeonnier"></select></div>
+          <div class="fg"><label>N° Père</label><input id="pere" list="bagues" maxlength="30"></div>
+          <div class="fg"><label>N° Mère</label><input id="mere" list="bagues" maxlength="30"></div>
+          <div class="fg"><label>Notes / Origine</label><textarea id="notes" rows="3" maxlength="500"></textarea></div>
+          <datalist id="bagues"></datalist>
+          <button type="submit" style="width:100%;margin-top:8px">Enregistrer le pigeon</button>
+        </form>
+      </div>
+      <div>
+        <div class="card">
+          <h2>Liste de la colonie</h2>
+          <div class="fg"><input id="search" placeholder="🔍 Rechercher bague, année, pigeonnier, notes..."></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>Année</th><th>Bague</th><th>Sexe</th><th>Pig.</th><th>Père</th><th>Mère</th><th>Actions</th></tr></thead>
+            <tbody id="tbody"></tbody></table></div>
+        </div>
+        <div class="card">
+          <h2>Arbre généalogique</h2>
+          <div id="pedView"><em>Cliquez sur une bague du tableau pour afficher son pedigree.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-pigeonniers" class="pane"><div class="card"><h2>🏠 Répartition des pigeonniers</h2><div class="g3" id="pigGrid"></div></div></div>
+
+  <div id="tab-accouplements" class="pane"><div class="card"><h2>💒 Grille d'accouplement <small style="color:var(--muted);font-weight:400">(sauvegarde automatique)</small></h2><div class="g3" id="casiers"></div></div></div>
+
+  <div id="tab-repro" class="pane">
+    <div class="card">
+      <h2>🥚 Saisir un tour de ponte / sevrage</h2>
+      <form id="rForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;align-items:end">
+        <div><label>♂ Père</label><select id="rM" required></select></div>
+        <div><label>♀ Mère</label><select id="rF" required></select></div>
+        <div><label>N° tour</label><input type="number" id="rT" min="1" max="5" value="1" required></div>
+        <div><label>Œufs pondus</label><input type="number" id="rP" min="0" max="2" value="2" required></div>
+        <div><label>Œufs féconds</label><input type="number" id="rE" min="0" max="2" value="2" required></div>
+        <div><label>Jeunes sevrés</label><input type="number" id="rS" min="0" max="2" value="2" required></div>
+        <button type="submit">➕ Enregistrer</button>
+      </form>
+    </div>
+    <div class="card">
+      <h2>📊 Bilan d'élevage</h2>
+      <div style="overflow-x:auto"><table>
+        <thead><tr><th>Père</th><th>Mère</th><th>Tour</th><th>Pondus</th><th>Fécondés</th><th>Sevrés</th><th></th></tr></thead>
+        <tbody id="rBody"></tbody></table></div>
+    </div>
+  </div>
+
+  <div id="tab-galerie" class="pane">
+    <div class="card"><h2>🖼️ Galerie Photo</h2>
+      <form id="gForm" class="row">
+        <input type="file" id="gFile" accept="image/*" multiple required style="flex:2;min-width:200px">
+        <input id="gBague" list="bagues" placeholder="Bague (optionnel)" maxlength="30" style="flex:1;min-width:130px">
+        <input id="gNote" placeholder="Légende" maxlength="100" style="flex:2;min-width:150px">
+        <button type="submit">📷 Ajouter</button>
+      </form><div id="gMsg" class="hint"></div></div>
+    <div class="card"><div id="gGrid" class="gal"></div></div>
+  </div>
+  <div id="lb" class="hidden"><img id="lbImg" alt=""></div>
+
+  <footer>© 2026 COLOMBIER DAULT MARTINE — Tous droits réservés.</footer>
+</div>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id), VK="cdm_vault", FK="cdm_fail", IDLE=10*60*1000;
+const enc=new TextEncoder(), dec=new TextDecoder();
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const b64=u=>{let s="";new Uint8Array(u).forEach(c=>s+=String.fromCharCode(c));return btoa(s)};
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+
+const INITIAL=[];
+
+let S=null, KEY=null, SALT=null, sel=null, idleT, saveT;
+const blankCasiers=()=>Array.from({length:12},()=>({m:"",f:"",n:""}));
+
+/* ---------- Stockage local + mot de passe (sans WebCrypto : fonctionne en HTTP) ---------- */
+const DK="cdm_data",AK="cdm_auth";
+const seal=()=>{if(S)try{localStorage.setItem(DK,JSON.stringify(S))}catch(x){alert("Sauvegarde impossible : "+x.message)}};
+const save=()=>{clearTimeout(saveT);saveT=setTimeout(seal,150);stats()};
+function sha256(msg){
+  const R=(x,n)=>x>>>n|x<<32-n,K=[],H=[];
+  for(let c=2,n=0;n<64;c++){let p=1;for(let d=2;d*d<=c;d++)if(c%d==0){p=0;break}
+    if(p){if(n<8)H[n]=Math.sqrt(c)%1*4294967296|0;K[n++]=Math.cbrt(c)%1*4294967296|0}}
+  const b=Array.from(msg),l=b.length*8;b.push(128);while(b.length%64!=56)b.push(0);
+  b.push(0,0,0,0,l>>>24&255,l>>>16&255,l>>>8&255,l&255);
+  let v=H.slice();
+  for(let i=0;i<b.length;i+=64){
+    const w=[];for(let t=0;t<16;t++)w[t]=b[i+t*4]<<24|b[i+t*4+1]<<16|b[i+t*4+2]<<8|b[i+t*4+3];
+    for(let t=16;t<64;t++){const x=w[t-15],y=w[t-2];w[t]=w[t-16]+(R(x,7)^R(x,18)^x>>>3)+w[t-7]+(R(y,17)^R(y,19)^y>>>10)|0}
+    let [a,c,d,e,f,g,h,k]=v;
+    for(let t=0;t<64;t++){
+      const t1=k+(R(f,6)^R(f,11)^R(f,25))+(f&g^~f&h)+K[t]+w[t]|0,t2=(R(a,2)^R(a,13)^R(a,22))+(a&c^a&d^c&d)|0;
+      k=h;h=g;g=f;f=e+t1|0;e=d;d=c;c=a;a=t1+t2|0}
+    v=[v[0]+a|0,v[1]+c|0,v[2]+d|0,v[3]+e|0,v[4]+f|0,v[5]+g|0,v[6]+h|0,v[7]+k|0];
+  }
+  return v.map(x=>(x>>>0).toString(16).padStart(8,"0")).join("");
+}
+const hashPw=(pw,salt)=>{let h=pw+salt;for(let i=0;i<3000;i++)h=sha256(enc.encode(h+pw+salt));return h};
+const getAuth=()=>{try{return JSON.parse(localStorage.getItem(AK))}catch{return null}};
+const hasVault=()=>!!getAuth()?.u;
+
+/* ---------- Connexion ---------- */
+function lockScreen(){
+  const setup=!hasVault();
+  $("lockMsg").textContent=setup?"Première utilisation : choisissez un identifiant et un mot de passe (6 caractères minimum).":"Accès protégé — connectez-vous.";
+  $("pw2box").classList.toggle("hidden",!setup);$("pw2").required=setup;
+  $("lockBtn").textContent=setup?"🔐 Créer le compte":"🔓 Se connecter";
+  $("forgot").classList.toggle("hidden",setup);
+  $("user").value=$("pw").value=$("pw2").value="";$("lockErr").textContent="";
+  $("lock").classList.remove("hidden");$("app").classList.add("hidden");
+}
+function lock(){
+  clearTimeout(idleT);seal();S=null;sel=null;
+  ["tbody","pedView","pigGrid","casiers","rBody","gGrid"].forEach(i=>$(i).innerHTML="");
+  lockScreen();$("lb").classList.add("hidden");
+}
+function resetIdle(){clearTimeout(idleT);if(S)idleT=setTimeout(lock,IDLE)}
+["click","keydown","touchstart","mousemove"].forEach(e=>document.addEventListener(e,resetIdle,{passive:true}));
+
+$("lockForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const err=$("lockErr"),pw=$("pw").value,u=$("user").value.trim().toLowerCase();
+  try{
+    const f=JSON.parse(localStorage.getItem(FK)||'{"n":0,"t":0}');
+    if(Date.now()<f.t){err.textContent=`Trop d'essais. Réessayez dans ${Math.ceil((f.t-Date.now())/1000)} s.`;return}
+    if(!hasVault()){
+      if(u.length<3){err.textContent="Identifiant : 3 caractères minimum.";return}
+      if(pw.length<6){err.textContent="6 caractères minimum.";return}
+      if(pw!==$("pw2").value){err.textContent="Les mots de passe ne correspondent pas.";return}
+      const salt=Array.from({length:16},()=>Math.floor(Math.random()*256).toString(16)).join("");
+      localStorage.setItem(AK,JSON.stringify({u,s:salt,h:hashPw(u+"|"+pw,salt)}));
+    }else{
+      const a=getAuth();
+      if(u!==a.u||hashPw(u+"|"+pw,a.s)!==a.h){
+        const n=f.n+1;localStorage.setItem(FK,JSON.stringify({n,t:n>=3?Date.now()+Math.min(30*(n-2),600)*1000:0}));
+        err.textContent="Identifiant ou mot de passe incorrect.";return}
+    }
+    localStorage.removeItem(FK);
+    let raw=localStorage.getItem(DK),old=null;
+    try{S=raw?JSON.parse(raw):null}catch{S=null}
+    if(!S){
+      try{old=JSON.parse(localStorage.getItem("pigeons_data")||localStorage.getItem("colonie_pigeons"))}catch{}
+      let repro=[];try{repro=JSON.parse(localStorage.getItem("colonie_repro"))||[]}catch{}
+      S={pigeons:Array.isArray(old)&&old.length?old:structuredClone(INITIAL),repro};
+    }
+    S.pigeons=S.pigeons||[];S.repro=S.repro||[];
+    S.casiers=S.casiers?.length===12?S.casiers:blankCasiers();
+    seal();
+    $("lock").classList.add("hidden");$("app").classList.remove("hidden");
+    $("user").value=$("pw").value=$("pw2").value="";
+    renderAll();resetIdle();
+  }catch(x){err.textContent="Erreur : "+(x&&x.message||x)}
+});
+$("showPw").addEventListener("change",e=>{$("pw").type=$("pw2").type=e.target.checked?"text":"password"});
+$("forgotLink").addEventListener("click",e=>{
+  e.preventDefault();
+  if(confirm("Identifiant ou mot de passe oublié : cela efface les accès ET les données de cet appareil.\nImportez ensuite votre dernière sauvegarde. Continuer ?")){
+    [DK,AK,FK].forEach(k=>localStorage.removeItem(k));lockScreen();
+  }
+});
+
+/* ---------- Données ---------- */
+const find=b=>b?S.pigeons.find(p=>p.bague.toLowerCase()===String(b).toLowerCase()):null;
+function stats(){
+  const c=x=>S.pigeons.filter(p=>p.sexe===x).length;
+  $("s-t").textContent=S.pigeons.length;$("s-m").textContent=c("M");$("s-f").textContent=c("F");
+  $("s-x").textContent=S.pigeons.length-c("M")-c("F");
+}
+function renderAll(){
+  $("pigeonnier").innerHTML='<option value="">-- Non attribué --</option>'+[1,2,3,4,5,6].map(n=>`<option value="${n}">Pigeonnier ${n}</option>`).join("");
+  $("bagues").innerHTML=S.pigeons.map(p=>`<option value="${esc(p.bague)}">`).join("");
+  stats();renderTable();renderPedigree();
+  const active=document.querySelector(".tab.active")?.dataset.tab;
+  if(active==="pigeonniers")renderPigeonniers();
+  if(active==="accouplements")renderCasiers();
+  if(active==="repro")renderRepro();
+  if(active==="galerie")renderGallery();
+}
+function renderTable(){
+  const q=$("search").value.trim().toLowerCase();
+  const rows=S.pigeons.filter(p=>!q||[p.bague,p.annee,p.pigeonnier?"p"+p.pigeonnier:"",p.pere,p.mere,p.notes].join(" ").toLowerCase().includes(q));
+  $("tbody").innerHTML=rows.map(p=>`<tr><td>${esc(p.annee)}</td>
+    <td><span class="link" data-act="ped" data-b="${esc(p.bague)}">${esc(p.bague)}</span>${p.notes?`<br><small style="color:var(--muted)">${esc(p.notes.split("\n")[0])}</small>`:""}</td>
+    <td class="${p.sexe}">${p.sexe==="M"?"♂":p.sexe==="F"?"♀":"?"}</td><td>${esc(p.pigeonnier)||"—"}</td>
+    <td>${esc(p.pere)}</td><td>${esc(p.mere)}</td>
+    <td class="row" style="border:0"><button class="edit" data-act="edit" data-b="${esc(p.bague)}">✏️</button><button class="danger" data-act="del" data-b="${esc(p.bague)}">🗑️</button></td></tr>`).join("")||`<tr><td colspan="7">${S.pigeons.length?"Aucun résultat.":"Colonie vide : ajoutez un pigeon ou cliquez sur « 📂 Importer » pour charger votre sauvegarde."}</td></tr>`;
+}
+function box(cls,b,label){
+  if(!b)return `<div class="box e ${cls}">${label} inconnu</div>`;
+  const p=find(b);
+  return `<div class="box ${p?p.sexe:""} ${cls}"><strong>${esc(b)}</strong>${p?`<small>${esc(p.annee)} · ${p.sexe==="M"?"♂":p.sexe==="F"?"♀":"?"}</small><small>${esc((p.notes||"").split("\n")[0])}</small>`:"<small>Hors colonie</small>"}</div>`;
+}
+function renderPedigree(){
+  const v=$("pedView"),p=find(sel);
+  if(!p){v.innerHTML="<em>Cliquez sur une bague du tableau pour afficher son pedigree.</em>";return}
+  const f=find(p.pere),m=find(p.mere);
+  v.innerHTML=`<div class="ped">${box("c0",p.bague,"")}${box("p1",p.pere,"Père")}${box("p2",p.mere,"Mère")}
+    ${box("q1",f?.pere,"Grand-père")}${box("q2",f?.mere,"Grand-mère")}${box("q3",m?.pere,"Grand-père")}${box("q4",m?.mere,"Grand-mère")}</div>`;
+}
+function renderPigeonniers(){
+  const g=n=>S.pigeons.filter(p=>String(p.pigeonnier||"")===String(n));
+  $("pigGrid").innerHTML=[1,2,3,4,5,6,""].map(n=>{
+    const l=g(n);return `<div class="cell"><h3><span>${n?"Pigeonnier "+n:"Non attribués"}</span><span>${l.length} (♂${l.filter(p=>p.sexe==="M").length} ♀${l.filter(p=>p.sexe==="F").length})</span></h3>
+    <ul>${l.map(p=>`<li class="${p.sexe}">${esc(p.bague)}</li>`).join("")||"<li style='color:var(--muted)'>Vide</li>"}</ul></div>`}).join("");
+}
+const opts=(sx,cur)=>'<option value="">—</option>'+S.pigeons.filter(p=>p.sexe===sx).map(p=>`<option ${p.bague===cur?"selected":""}>${esc(p.bague)}</option>`).join("");
+function renderCasiers(){
+  $("casiers").innerHTML=S.casiers.map((c,i)=>`<div class="cell"><h3><span>Casier ${i+1}</span></h3>
+    <div class="fg"><label>♂ Mâle</label><select data-i="${i}" data-k="m">${opts("M",c.m)}</select></div>
+    <div class="fg"><label>♀ Femelle</label><select data-i="${i}" data-k="f">${opts("F",c.f)}</select></div>
+    <div class="fg"><input data-i="${i}" data-k="n" placeholder="Note" maxlength="100" value="${esc(c.n)}"></div></div>`).join("");
+}
+function renderRepro(){
+  const cur=[$("rM").value,$("rF").value];
+  $("rM").innerHTML=opts("M",cur[0]).slice(opts("M").indexOf("</option>")+9);
+  $("rF").innerHTML=opts("F",cur[1]).slice(opts("F").indexOf("</option>")+9);
+  const t=S.repro.reduce((a,r)=>({p:a.p+r.p,e:a.e+r.e,s:a.s+r.s}),{p:0,e:0,s:0});
+  const pc=(a,b)=>b?Math.round(a/b*100)+" %":"—";
+  $("rBody").innerHTML=S.repro.map((r,i)=>`<tr><td>${esc(r.m)}</td><td>${esc(r.f)}</td><td>${r.t}</td><td>${r.p}</td><td>${r.e}</td><td>${r.s}</td><td><button class="danger" data-act="rdel" data-i="${i}">🗑️</button></td></tr>`).join("")
+   +(S.repro.length?`<tr><th colspan="3">Total · fécondité ${pc(t.e,t.p)} · réussite ${pc(t.s,t.p)}</th><th>${t.p}</th><th>${t.e}</th><th>${t.s}</th><th></th></tr>`:'<tr><td colspan="7">Aucun tour enregistré.</td></tr>');
+}
+
+/* ---------- Galerie (photos stockées dans IndexedDB, redimensionnées) ---------- */
+const idb=()=>new Promise((ok,ko)=>{const r=indexedDB.open("cdm_photos",1);r.onupgradeneeded=()=>r.result.createObjectStore("p",{keyPath:"id"});r.onsuccess=()=>ok(r.result);r.onerror=()=>ko(r.error)});
+const tx=async(m,f)=>{const d=await idb();return new Promise((ok,ko)=>{const t=d.transaction("p",m),r=f(t.objectStore("p"));t.oncomplete=()=>ok(r.result);t.onerror=()=>ko(t.error)})};
+const photosAll=()=>tx("readonly",s=>s.getAll()),photoPut=p=>tx("readwrite",s=>s.put(p)),photoDel=id=>tx("readwrite",s=>s.delete(id)),photosClear=()=>tx("readwrite",s=>s.clear());
+const resize=f=>new Promise((ok,ko)=>{const r=new FileReader();r.onerror=ko;r.onload=()=>{const i=new Image();i.onerror=ko;i.onload=()=>{
+  const k=Math.min(1,1200/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);
+  c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",.8))};i.src=r.result};r.readAsDataURL(f)});
+async function renderGallery(){
+  try{const l=(await photosAll()).sort((a,b)=>b.t-a.t);
+    $("gGrid").innerHTML=l.map(p=>`<figure class="ph"><img src="${esc(p.d)}" data-act="zoom" alt="${esc(p.n)}" loading="lazy"><div><span>${esc(p.n)}${p.b?` <b class="${find(p.b)?.sexe||""}">${esc(p.b)}</b>`:""}</span><button class="danger" data-act="pdel" data-id="${esc(p.id)}">🗑️</button></div></figure>`).join("")||"<em>Aucune photo pour le moment.</em>";
+  }catch(x){$("gGrid").textContent="Galerie indisponible : "+x.message}
+}
+$("gForm").addEventListener("submit",async e=>{
+  e.preventDefault();const m=$("gMsg");m.textContent="Traitement…";
+  try{for(const f of $("gFile").files)await photoPut({id:Date.now()+"-"+Math.random().toString(36).slice(2,7),d:await resize(f),n:$("gNote").value.trim(),b:$("gBague").value.trim(),t:Date.now()});
+    e.target.reset();m.textContent="Photos ajoutées ✔";renderGallery();
+  }catch(x){m.textContent="Erreur : "+(x.message||x)}
+});
+$("lb").addEventListener("click",()=>$("lb").classList.add("hidden"));
+
+/* ---------- Actions ---------- */
+$("pForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const bague=$("bague").value.trim();if(!bague)return;
+  const p={bague,annee:$("annee").value,sexe:$("sexe").value,pigeonnier:$("pigeonnier").value,pere:$("pere").value.trim(),mere:$("mere").value.trim(),notes:$("notes").value.trim()};
+  const i=S.pigeons.findIndex(x=>x.bague.toLowerCase()===bague.toLowerCase());
+  i>=0?S.pigeons[i]=p:S.pigeons.push(p);
+  save();e.target.reset();renderAll();
+});
+$("rForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const n=id=>Math.max(0,Math.min(5,+$(id).value||0));
+  const p=Math.min(n("rP"),2),ef=Math.min(n("rE"),p),s=Math.min(n("rS"),ef);
+  S.repro.push({m:$("rM").value,f:$("rF").value,t:n("rT")||1,p,e:ef,s});
+  save();renderRepro();
+});
+$("search").addEventListener("input",renderTable);
+$("casiers").addEventListener("change",e=>{const t=e.target;if(t.dataset.k){S.casiers[t.dataset.i][t.dataset.k]=t.value;save()}});
+$("importFile").addEventListener("change",async e=>{
+  const file=e.target.files[0];e.target.value="";if(!file)return;
+  try{
+    const d=JSON.parse(await file.text());
+    const list=Array.isArray(d)?d:d.pigeons;
+    if(!Array.isArray(list)||list.some(p=>!p||typeof p.bague!=="string"))throw 0;
+    if(!confirm(`Remplacer les données actuelles par ${list.length} pigeons importés ?`))return;
+    S.pigeons=list.map(p=>({bague:p.bague.slice(0,30),annee:String(p.annee??""),sexe:["M","F"].includes(p.sexe)?p.sexe:"X",pigeonnier:String(p.pigeonnier??""),pere:String(p.pere??""),mere:String(p.mere??""),notes:String(p.notes??"").slice(0,500)}));
+    if(!Array.isArray(d)){if(Array.isArray(d.repro))S.repro=d.repro;if(Array.isArray(d.casiers)&&d.casiers.length===12)S.casiers=d.casiers}
+    if(!Array.isArray(d)&&Array.isArray(d.photos)){await photosClear();
+      for(const p of d.photos)if(p&&typeof p.d==="string"&&p.d.startsWith("data:image/"))await photoPut({id:String(p.id||Date.now()+Math.random()),d:p.d,n:String(p.n??"").slice(0,100),b:String(p.b??"").slice(0,30),t:+p.t||Date.now()})}
+    save();renderAll();alert("Import réussi.");
+  }catch{alert("Fichier invalide.")}
+});
+document.addEventListener("click",e=>{
+  const tab=e.target.closest("[data-tab]");
+  if(tab){
+    document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b===tab));
+    document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("active",p.id==="tab-"+tab.dataset.tab));
+    renderAll();return;
+  }
+  const el=e.target.closest("[data-act]");if(!el||!S)return;
+  const b=el.dataset.b;
+  switch(el.dataset.act){
+    case"ped":sel=b;renderPedigree();break;
+    case"edit":{const p=find(b);if(!p)break;
+      ["annee","bague","sexe","pigeonnier","pere","mere","notes"].forEach(k=>$(k).value=p[k]||"");
+      scrollTo({top:0,behavior:"smooth"});break}
+    case"del":if(confirm(`Supprimer ${b} ?`)){S.pigeons=S.pigeons.filter(p=>p.bague!==b);if(sel===b)sel=null;save();renderAll()}break;
+    case"rdel":S.repro.splice(+el.dataset.i,1);save();renderRepro();break;
+    case"reset":if(confirm("Effacer TOUTE la colonie (pigeons, reproduction, casiers, photos) ?\nExportez d'abord une sauvegarde si besoin.")){S.pigeons=[];S.repro=[];S.casiers=blankCasiers();sel=null;photosClear().catch(()=>{});save();renderAll()}break;
+    case"zoom":$("lbImg").src=el.src;$("lb").classList.remove("hidden");break;
+    case"pdel":if(confirm("Supprimer cette photo ?"))photoDel(el.dataset.id).then(renderGallery);break;
+    case"lock":lock();break;
+    case"import":$("importFile").click();break;
+    case"export":(async()=>{
+      const o={...S,photos:await photosAll().catch(()=>[])},a=document.createElement("a");
+      a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:"application/json"}));
+      a.download=`colombier-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)})();break;
+  }
+});
+addEventListener("pagehide",seal);
+let okLS=true;try{localStorage.setItem("_t","1");localStorage.removeItem("_t")}catch{okLS=false}
+if(!okLS){$("lockMsg").textContent="⚠️ Le navigateur bloque le stockage local (navigation privée ?). Ouvrez la page dans un onglet normal.";$("lockBtn").disabled=true;$("forgot").classList.add("hidden")}
+else lockScreen();
+</script>
+</body>
+</html>
